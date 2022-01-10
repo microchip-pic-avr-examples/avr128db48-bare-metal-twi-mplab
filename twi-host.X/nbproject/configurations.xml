@@ -17,7 +17,6 @@
         <logicalFolder name="f2" displayName="TWI" projectFiles="true">
           <itemPath>peripherals/TWI/TWI_host.h</itemPath>
         </logicalFolder>
-        <itemPath>peripherals/IO.h</itemPath>
       </logicalFolder>
       <itemPath>advanced_IO.h</itemPath>
     </logicalFolder>
@@ -41,7 +40,6 @@
         <logicalFolder name="f2" displayName="TWI" projectFiles="true">
           <itemPath>peripherals/TWI/TWI_host.c</itemPath>
         </logicalFolder>
-        <itemPath>peripherals/IO.c</itemPath>
       </logicalFolder>
       <itemPath>main.c</itemPath>
       <itemPath>advanced_IO.c</itemPath>
@@ -296,7 +294,7 @@
         <property key="communication.speed" value="0.500"/>
         <property key="debugoptions.debug-startup" value="Use system settings"/>
         <property key="debugoptions.reset-behaviour" value="Use system settings"/>
-        <property key="debugoptions.useswbreakpoints" value="true"/>
+        <property key="debugoptions.useswbreakpoints" value="false"/>
         <property key="firmware.path"
                   value="Press to browse for a specific firmware version"/>
         <property key="firmware.toolpack"
@@ -337,10 +335,10 @@
     <conf name="pro" type="2">
       <toolsSet>
         <developmentServer>localhost</developmentServer>
-        <targetDevice>AVR128DB28</targetDevice>
+        <targetDevice>AVR128DB48</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>noID</platformTool>
+        <platformTool>nEdbgTool</platformTool>
         <languageToolchain>XC8</languageToolchain>
         <languageToolchainVersion>2.35</languageToolchainVersion>
         <platform>3</platform>
@@ -570,6 +568,8 @@
         <property key="communication.activationmode" value="nohv"/>
         <property key="communication.interface" value="updi"/>
         <property key="communication.speed" value="0.500"/>
+        <property key="debugoptions.debug-startup" value="Use system settings"/>
+        <property key="debugoptions.reset-behaviour" value="Use system settings"/>
         <property key="debugoptions.useswbreakpoints" value="true"/>
         <property key="firmware.path"
                   value="Press to browse for a specific firmware version"/>
@@ -590,7 +590,6 @@
                   value="${memories.instruction.ram.ranges}"/>
         <property key="memories.programmemory" value="true"/>
         <property key="memories.programmemory.ranges" value="0-ffff"/>
-        <property key="memories.rww" value="true"/>
         <property key="poweroptions.powerenable" value="true"/>
         <property key="programoptions.eraseb4program" value="true"/>
         <property key="programoptions.preservedataflash" value="false"/>

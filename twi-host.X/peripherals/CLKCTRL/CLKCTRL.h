@@ -5,7 +5,11 @@
 extern "C" {
 #endif
     
-    //Configure the Device Clock
+    /**
+     * <b><FONT COLOR=BLUE>void</FONT> CLKCTRL_init(<FONT COLOR=BLUE>void</FONT>)</B>
+     * 
+     * This function initalizes the clock on the microcontroller.
+     */
     void CLKCTRL_init(void);
 
 #ifdef	__cplusplus

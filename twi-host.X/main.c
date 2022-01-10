@@ -38,7 +38,6 @@ Copyright (c) [2012-2020] Microchip Technology Inc.
 #include <avr/interrupt.h>
 #include <avr/eeprom.h>
 
-#include "peripherals/IO.h"
 #include "peripherals/CLKCTRL/CLKCTRL.h"
 #include "peripherals/RTC/RTC.h"
 #include "peripherals/SLPCTRL/SLPCTRL.h"
@@ -69,9 +68,6 @@ int main(void)
     
     //Init the IO Expander
     advancedIO_init();
-
-    //Init Device I/O
-    IO_init();
     
     //Enable Interrupts
     sei();

@@ -31,6 +31,8 @@ bool isTWIBad(void)
 
 void TWI_initHost(void)
 {    
+    TWI_initPins();
+    
     //Standard 100kHz TWI, 4 Cycle Hold, 50ns SDA Hold Time
     TWI0.CTRLA = TWI_SDAHOLD_50NS_gc;
     
@@ -50,6 +52,22 @@ void TWI_initHost(void)
     //[No ISRs] and Host Mode
     TWI0.MCTRLA = TWI_ENABLE_bm;
 
+}
+
+void TWI_initPins(void)
+{
+    //PA2/PA3
+        
+    //Output I/O
+    PORTA.DIRSET = PIN2_bm | PIN3_bm;
+
+#ifdef TWI_ENABLE_PULLUPS
+    //Enable Pull-Ups
+    PORTA.PINCONFIG = PORT_PULLUPEN_bm;
+#endif
+
+    //Select RA2/RA3
+    PORTA.PINCTRLUPD = PIN2_bm | PIN3_bm;
 }
 
 bool _startTWI(uint8_t addr, bool read)
