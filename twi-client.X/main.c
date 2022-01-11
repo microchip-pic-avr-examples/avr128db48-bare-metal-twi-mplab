@@ -61,6 +61,9 @@ int main(void)
     //Setup CPU Clocks
     CLKCTRL_init();
     
+    //Setup TWI I/O
+    TWI_initPins();
+    
     //Setup TWI Interface
     TWI_initClient(0x40);
     

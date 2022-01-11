@@ -12,10 +12,7 @@ static uint8_t (*readHandler)(void);
 static void (*stopHandler)(void);
 
 void TWI_initClient(uint8_t address)
-{   
-    //Init I/O for TWI
-    TWI_initPins();
-    
+{       
     //Init Function Pointers to Null
     writeHandler = 0;
     readHandler = 0;
