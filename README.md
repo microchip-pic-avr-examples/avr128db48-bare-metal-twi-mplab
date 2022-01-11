@@ -14,13 +14,13 @@ This code example provides a simple bare-metal TWI driver for the AVR&reg; DB fa
 
 ## Software Used
 
-- [MPLAB&reg; X IDE v6.0.0 or newer](#)
-- [MPLAB XC8 v2.35.0 or newer](#)
+- [MPLAB&reg; X IDE v6.0.0 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_avrdb&utm_content=avr128db48-bare-metal-twi-mplab)
+- [MPLAB XC8 v2.35.0 or newer](https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_avrdb&utm_content=avr128db48-bare-metal-twi-mplab)
 
 ## Hardware Used
 
-- AVR128DB48 Curiosity Nano
-- Curiosity Nano Adapter Board
+- [AVR128DB48 Curiosity Nano Evaluation Kit (EV35L43A)](https://www.microchip.com/DevelopmentTools/ProductDetails/PartNO/EV35L43A?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_avrdb&utm_content=avr128db48-bare-metal-twi-mplab)
+- [Curiosity Nano Base for Click Boards&trade; (AC164162)](https://www.microchip.com/en-us/development-tool/AC164162)
 
 **Important: The Curiosity Nano, MCP2221A, and I/O Expander have been configured for 3.3V operation. 5V Operation is also possible, but all demo parts must be set for 5V operation (e.g.: no mixing voltage levels). Permanent damage may occur if mixed.**
 
@@ -30,7 +30,7 @@ This code example provides a simple bare-metal TWI driver for the AVR&reg; DB fa
 
 ### Client Mode Testing
 
-- [MCP2221A USB-I<sup>2</sup>C Bridge](#)
+- [MCP2221A USB-I<sup>2</sup>C Breakout Module (ADM00559)](https://www.microchip.com/en-us/development-tool/ADM00559?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_avrdb&utm_content=avr128db48-bare-metal-twi-mplab)
 
 ## Pin Usage
 
