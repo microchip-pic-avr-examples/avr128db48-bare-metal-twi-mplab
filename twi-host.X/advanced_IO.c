@@ -17,6 +17,9 @@ void advancedIO_init(void)
 {   
     //Init MSSP Module in I2C Host Mode
     TWI_initHost();
+    
+    //Init I/O
+    TWI_initPins();
 }
 
 void advancedIO_setRegister(ADVANCED_IO_REGISTER reg, uint8_t value)

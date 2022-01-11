@@ -22,7 +22,6 @@ extern "C" {
      * <b><FONT COLOR=BLUE>void</FONT> TWI_initPins(<FONT COLOR=BLUE>void</FONT>)</B>
      * 
      * This function initializes the I/O used by the TWI peripheral.
-     * Called by TWI_initHost as part of initialization.
      */
     void TWI_initPins(void);
     

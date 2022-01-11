@@ -30,9 +30,7 @@ bool isTWIBad(void)
 }
 
 void TWI_initHost(void)
-{    
-    TWI_initPins();
-    
+{        
     //Standard 100kHz TWI, 4 Cycle Hold, 50ns SDA Hold Time
     TWI0.CTRLA = TWI_SDAHOLD_50NS_gc;
     
