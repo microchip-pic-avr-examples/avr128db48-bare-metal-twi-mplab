@@ -48,7 +48,6 @@
                    displayName="Important Files"
                    projectFiles="false">
       <itemPath>Makefile</itemPath>
-      <itemPath>avr128db48-uv-monitor-mplab.mc3</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
@@ -316,7 +315,7 @@
         <property key="memories.programmemory.ranges" value="0-ffff"/>
         <property key="poweroptions.powerenable" value="false"/>
         <property key="programmerToGoFilePath"
-                  value="C:/Users/C62081/Documents/GIT Repos/avr128db48-bare-metal-twi-mplab/twi-host.X/debug/free/twi-host_ptg"/>
+                  value="C:/Users/C62081/MPLABXProjects/UVIndexDemo.X/debug/default/UVIndexDemo_ptg"/>
         <property key="programoptions.eraseb4program" value="true"/>
         <property key="programoptions.preservedataflash" value="false"/>
         <property key="programoptions.preservedataflash.ranges"
@@ -594,7 +593,7 @@
         <property key="memories.programmemory.ranges" value="0-ffff"/>
         <property key="poweroptions.powerenable" value="true"/>
         <property key="programmerToGoFilePath"
-                  value="C:/Users/C62081/Documents/GIT Repos/avr128db48-bare-metal-twi-mplab/twi-host.X/debug/pro/twi-host_ptg"/>
+                  value="C:/Users/C62081/MPLABXProjects/UVIndexDemo.X/debug/default/UVIndexDemo_ptg"/>
         <property key="programoptions.eraseb4program" value="true"/>
         <property key="programoptions.preservedataflash" value="false"/>
         <property key="programoptions.preservedataflash.ranges"

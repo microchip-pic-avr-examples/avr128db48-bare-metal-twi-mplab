@@ -27,10 +27,12 @@ This code example provides a simple bare-metal TWI driver for the AVR&reg; DB fa
 ### Host Mode Testing
 
  - [Advanced I/O Expander Demo Board](https://github.com/microchip-pic-avr-examples/pic16f15244-family-advanced-i2c-io-expander)
+  - Attaching the external pull-up resistors is recommended
 
 ### Client Mode Testing
 
 - [MCP2221A USB-I<sup>2</sup>C Breakout Module (ADM00559)](https://www.microchip.com/en-us/development-tool/ADM00559?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_avrdb&utm_content=avr128db48-bare-metal-twi-mplab)
+  - Using the external pull-up resistors are recommended
 
 ## Pin Usage
 
@@ -61,6 +63,8 @@ Host mode operation allows the microcontroller to control the I<sup>2</sup>C bus
 
 If `TWI_ENABLE_PULLUPS` is defined, internal pull-up resistors on the I/O will be enabled.
 
+*Caution: The TWI pull-ups are not very strong, and may cause marginal behavior in some cases. We recommend use external pull-up resistors, if possible.*
+
 #### TWI Host - API Description
 
 ##### Initialization Functions
@@ -70,7 +74,7 @@ void TWI_initHost(void)
 void TWI_initPins(void)
 ```
 
-To initialize the peripheral and the I/O, two functions are provided. The first `TWI_initHost()` initializes the peripheral settings for the TWI. The second function `TWI_initPins()` is used to setup the I/O pins for the peripheral. If different I/O pins are used (via PORTMUX or a different TWI instance), then this function will need to modified accordingly.
+To initialize the peripheral and the I/O, two functions are provided. The first function `TWI_initHost()` initializes the peripheral settings for the TWI. The second function `TWI_initPins()` is used to setup the I/O pins for the peripheral. If different I/O pins are used (via PORTMUX or a different TWI instance), then this function will need to be modified accordingly.
 
 ##### Writing to Clients
 
@@ -79,7 +83,7 @@ bool TWI_sendByte(uint8_t addr, uint8_t data)
 bool TWI_sendBytes(uint8_t addr, uint8_t* data, uint8_t len)
 ```
 
-To write data from the host to the client device at ADDR, two functions are provided. Either call `TWI_sendByte(uint8_t addr, uint8_t data)` or `TWI_sendBytes(uint8_t addr, uint8_t* data, uint8_t len)`. Both functions operate similarly, however `TWI_sendByte` is designed to send only a single byte of data, whereas `TWI_sendBytes` is designed to send LEN bytes to the client.
+To write data from the host to the client device at ADDR, two functions are provided. Either call `TWI_sendByte(uint8_t addr, uint8_t data)` or `TWI_sendBytes(uint8_t addr, uint8_t* data, uint8_t len)`. Both functions operate similarly, however `TWI_sendByte` only sends a single byte of data, whereas `TWI_sendBytes` will try to send LEN bytes to the client.
 
 If the client NACKs during addressing or data transmission, these functions return false.
 
@@ -90,7 +94,7 @@ bool TWI_readByte(uint8_t addr, uint8_t* data)
 bool TWI_readBytes(uint8_t addr, uint8_t* data, uint8_t len)
 ```
 
-To get data from the client to the host, two functions are provided. The first `TWI_readByte(uint8_t addr, uint8_t* data)` reads a single byte from the client device at ADDR, whereas the second function `bool TWI_readBytes(uint8_t addr, uint8_t* data, uint8_t len)` will attempt to read LEN bytes from the client.
+To read data from the client, two functions are provided. The first function `TWI_readByte(uint8_t addr, uint8_t* data)` reads a single byte from the client device at ADDR, whereas the second function `bool TWI_readBytes(uint8_t addr, uint8_t* data, uint8_t len)` will attempt to read LEN bytes from the client.
 
 If the client NACKs during addressing, these functions return false.
 
@@ -100,7 +104,7 @@ If the client NACKs during addressing, these functions return false.
 bool TWI_sendAndReadBytes(uint8_t addr, uint8_t regAddress, uint8_t* data, uint8_t len)
 ```
 
-To perform a write-restart-read operation in I<sup>2</sup>C, a special function must be called `TWI_sendAndReadBytes(uint8_t addr, uint8_t regAddress, uint8_t* data, uint8_t len)`. This function addresses the client at ADDR in write mode, writes a single byte (regAddress), then restarts the bus. Then, the client is re-addressed in read mode and LEN bytes are read back.
+To perform a write-restart-read operation in I<sup>2</sup>C, call `TWI_sendAndReadBytes(uint8_t addr, uint8_t regAddress, uint8_t* data, uint8_t len)`. This function addresses the client at ADDR in write mode, writes a single byte (regAddress), then restarts the bus. Then, the client is re-addressed in read mode and LEN bytes are read back.
 
 If the client NACKs during addressing or transmission, then this function will return false.
 
@@ -111,14 +115,14 @@ If the client NACKs during addressing or transmission, then this function will r
 | void advancedIO_init(void) | Initializes the Advanced I/O Expander and the TWI peripheral
 | void advancedIO_setRegister(ADVANCED_IO_REGISTER reg, uint8_t value) | Sets a register inside of the Advanced I/O Expander to the value specified.
 | uint8_t advancedIO_getRegister(ADVANCED_IO_REGISTER reg) | Returns the value inside of the Advanced I/O Expander.
-| void advancedIO_toggleBitsInRegister(ADVANCED_IO_REGISTER reg, uint8_t mask) | Inverts the bits defined by the mask in the register specified.
-| uint8_t advancedIO_getPinState(void) | Returns the digital levels on the I/O Expander pins.
+| void advancedIO_toggleBitsInRegister(ADVANCED_IO_REGISTER reg, uint8_t mask) | Inverts the bits defined by the mask in the register specified (of the Advanced I/O Expander).
+| uint8_t advancedIO_getPinState(void) | Returns the digital values on the I/O Expander pins.
 | void advancedIO_setOutputsHigh(uint8_t mask) | Sets the output value of the pins defined by the mask to be '1'. **Does not set the pin as an output.**
 | void advancedIO_setOutputsLow(uint8_t mask) | Sets the output value of the pins defined by the mask to be '0'. **Does not set the pin as an output.**
 | void advancedIO_setPinsAsInputs(uint8_t mask) | Sets the pins defined by the mask to be outputs. **Does not set the output level of the pin.**
 | void advancedIO_setPinsAsOutputs(uint8_t mask) | Sets the pins defined by the mask to be inputs.
-| void advancedIO_resetToDefault(void) | Resets the Advanced I/O Expander to compile time defaults. **The INT line must be monitored to properly use this function. Consult the Advanced I/O Expander API for more information.**
-| void advancedIO_performMemoryOP(ADVANCED_IO_MEMORY_OP op) | Performs a memory operation (reset/save/load/save+load) on the Advanced I/O Expander. **The INT line must be monitored to properly use this function. Consult the Advanced I/O Expander API for more information.**
+| void advancedIO_resetToDefault(void) | Resets the Advanced I/O Expander to compile time defaults. **The !INT line must be monitored to properly use this function. Consult the Advanced I/O Expander API for more information.**
+| void advancedIO_performMemoryOP(ADVANCED_IO_MEMORY_OP op) | Performs a memory operation (reset/save/load/save+load) on the Advanced I/O Expander. **The !INT line must be monitored to properly use this function. Consult the Advanced I/O Expander API for more information.**
 
 [Advanced I/O Expander README](https://github.com/microchip-pic-avr-examples/pic16f15244-family-advanced-i2c-io-expander)
 
@@ -128,7 +132,7 @@ The demo program uses the TWI, Real-Time Clock (RTC) and Sleep Controller (SLPCT
 
 ## Client Mode
 
-Client mode operation allows the microcontroller to act as an attached device in an application. The main microcontroller/microprocessor might handle the computations and execution of high-speed or complex operations, while the attached device may handle tasks that are simpler or require  real-time control / management without the added software complexity.
+Client mode operation allows the microcontroller to act as an attached device in an application. The main microcontroller/microprocessor might handle the computations and execution of high-speed or complex operations, while the attached device may handle tasks that are simpler or require  real-time control / management without the added software complexity on the main device.
 
 **Note: This API only supports interrupt driven operation.**
 
@@ -139,12 +143,14 @@ Client mode operation allows the microcontroller to act as an attached device in
 | void TWI_initClient(uint8_t address) | Configures the TWI Peripheral in client mode.
 | void TWI_initPins(void) | Sets up the I/O used by the TWI Peripheral.
 | void TWI_assignByteWriteHandler(void (*onWrite)(uint8_t)) | Sets the function to call when a byte is received from the host. **If not defined, the received bytes are discarded.**
-| void TWI_assignByteReadHandler(uint8_t (*onRead)(void)) | Sets the function to call when a byte is needed to send the host. **If not defined, the client will always send 0x00 to the host.**
+| void TWI_assignByteReadHandler(uint8_t (*onRead)(void)) | Sets the function to call when a byte is needed to send to the host. **If not defined, the client will send 0x00 to the host.**
 | void TWI_assignStopHandler(void (*onStop)(void)) | Sets the function to call when a STOP condition occurs on the I<sup>2</sup>C bus. **If not defined, no action will occur (and the bus will STOP normally).**
 
 **Warning: Do not use blocking code in any function handlers. This will increase response time and will lock the bus until resolved.**
 
 If `TWI_ENABLE_PULLUPS` is defined, internal pull-up resistors on the I/O will be enabled.
+
+*Caution: The TWI pull-ups are not very strong, and may cause marginal behavior in some cases. We recommend use external pull-up resistors, if possible.*
 
 #### TWI Client - API Description
 
@@ -195,7 +201,7 @@ If `FIRST_BYTE_ADDR` is defined, then the 1st byte received is considered the st
 
 #### Block Memory - API Description
 
-The block memory API provides a simple way to implement bulk data read/write operations. This API is **not required** for the bare-metal TWI driver, but it can be paired with this API easily by adding the following lines of code to main:
+The block memory API provides a simple way to implement bulk data read/write operations. This API is **not required** for the bare-metal TWI driver, but it can be paired with this API by adding the following lines of code to main:
 
 ```
 //Attach R/W Buffers
@@ -217,7 +223,7 @@ In the example code above, the read and write buffers point to the same array, b
 
 #### Block Memory - Operation
 
-If `FIRST_BYTE_ADDR` is defined, then this library will assume the 1st byte received is the address to start memory read/write operations. In this case, to write 1, 2, 3, 4 to the array starting at an offset, the data to send would be: \<offset>, 1, 2, 3, 4. To read data at a specific address, write \<offset> and then being a read operation.
+If `FIRST_BYTE_ADDR` is defined, then this library will assume the 1st byte received is the address to start memory read/write operations. In this case, to write 1, 2, 3, 4 to the array starting at an offset, the data to send would be: \<offset>, 1, 2, 3, 4. To read data at a specific address, write \<offset>, restart the bus and begin a read operation.
 
 If `FIRST_BYTE_ADDR` is NOT defined, then writes and reads start at 0x00.
 
