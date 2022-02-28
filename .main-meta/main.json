@@ -20,7 +20,7 @@
         ],
         "dfp": {
             "name": "AVR-Dx_DFP",
-            "semverRange": ">=1.10.124"
+            "semverRange": "^1.10.124"
         },
         "device": {
             "metaDataVersion": "1.0.0",
